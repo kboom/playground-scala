@@ -12,6 +12,10 @@ class CustomListTest extends FlatSpec with Matchers {
     CustomList.append(CustomList[Int](1,2), CustomList[Int](3,4)) should be (CustomList[Int](1,2,3,4))
   }
 
+  "length of [1,2]" should "be 2" in {
+    CustomList.length(CustomList[Int](1,2)) should be (2)
+  }
+
   "A sum of [1,2]" should "be 3" in {
     CustomList.sum2(CustomList[Int](1,2)) should be (3)
   }

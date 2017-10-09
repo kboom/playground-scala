@@ -32,6 +32,9 @@ object CustomList {
     case _ => l
   }
 
+  def length[A](l: CustomList[A]): Int =
+    foldRight(l, 0)((_, b) => 1 + b)
+
   def apply[A](as: A*): CustomList[A] =
     if (as.isEmpty) Nil
     else Cons(as.head, apply(as.tail: _*))
