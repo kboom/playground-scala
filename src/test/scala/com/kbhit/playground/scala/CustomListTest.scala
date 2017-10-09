@@ -13,7 +13,11 @@ class CustomListTest extends FlatSpec with Matchers {
   }
 
   "A sum of [1,2]" should "be 3" in {
-    CustomList.sum(CustomList[Int](1,2)) should be (3)
+    CustomList.sum2(CustomList[Int](1,2)) should be (3)
+  }
+
+  "A product of [1,2,3]" should "be 6" in {
+    CustomList.sum2(CustomList[Int](1,2,3)) should be (6)
   }
 
   "tail of [1,2]" should "be [2]" in {

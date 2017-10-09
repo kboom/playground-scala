@@ -16,15 +16,11 @@ object CustomList {
 
   def setHead[A](l: CustomList[A], e: A): CustomList[A] = Cons(e, l)
 
-  def sum(ints: CustomList[Int]): Int = ints match {
-    case Nil => 0
-    case Cons(x,xs) => x + sum(xs)
-  }
+  def sum2(l: CustomList[Int]): Double =
+    foldRight(l, 0.0)(_ + _)
 
-  def product(ds: CustomList[Double]): Double = ds match {
-    case Nil => 1.0
-    case Cons(x, xs) => x * product(xs)
-  }
+  def product2(l: CustomList[Double]): Double =
+    foldRight(l, 1.0)(_ * _, t => t != 0)
 
   def tail[A](list: CustomList[A], count: Int = 1): CustomList[A] = (list, count) match {
     case (Cons(_, xs), _) if count > 0 => tail(xs, count - 1)
@@ -39,6 +35,14 @@ object CustomList {
   def apply[A](as: A*): CustomList[A] =
     if (as.isEmpty) Nil
     else Cons(as.head, apply(as.tail: _*))
+
+
+  private def foldRight[A,B](l: CustomList[A], z: B)(f: (A, B) => B, g: (A) => Boolean = (_: A) => true): B =
+    l match {
+      case Nil => z
+      case Cons(x, xs) if g(x) => f(x, foldRight(xs, z)(f, g))
+      case Cons(x, _) => f(x, z)
+    }
 
 }
 
