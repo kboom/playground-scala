@@ -42,6 +42,9 @@ object CustomList {
     if (as.isEmpty) Nil
     else Cons(as.head, apply(as.tail: _*))
 
+  def map[A,B](l: CustomList[A])(f: A => B): CustomList[B] =
+    foldRight(l, CustomList[B]())((b: A, a: CustomList[B]) => Cons(f(b), a))
+
   def foldRight[A,B](l: CustomList[A], z: B)(f: (A, B) => B, g: (A) => Boolean = (_: A) => true): B =
     l match {
       case Nil => z

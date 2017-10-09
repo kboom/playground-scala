@@ -40,4 +40,8 @@ class CustomListTest extends FlatSpec with Matchers {
     CustomList.reverse(CustomList[Int](1,2,3)) should be (CustomList[Int](3,2,1))
   }
 
+  "map x -> x * 2 of [1,2]" should "be [2,4]" in {
+    CustomList.map(CustomList[Int](1,2))(t => t * 2) should be (CustomList[Int](2,4))
+  }
+
 }
