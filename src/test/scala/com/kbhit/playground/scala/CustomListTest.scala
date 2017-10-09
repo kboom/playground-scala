@@ -4,6 +4,14 @@ import org.scalatest.{FlatSpec, _}
 
 class CustomListTest extends FlatSpec with Matchers {
 
+  "setHead 1 to [3,4]" should "be [1,3,4]" in {
+    CustomList.setHead(CustomList[Int](3,4), 1) should be (CustomList[Int](1,3,4))
+  }
+
+  "append [1,2] to [3,4]" should "be [1,2,3,4]" in {
+    CustomList.append(CustomList[Int](1,2), CustomList[Int](3,4)) should be (CustomList[Int](1,2,3,4))
+  }
+
   "A sum of [1,2]" should "be 3" in {
     CustomList.sum(CustomList[Int](1,2)) should be (3)
   }

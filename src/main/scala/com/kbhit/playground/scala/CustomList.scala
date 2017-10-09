@@ -8,6 +8,14 @@ case class Cons[+A](head: A, tail: CustomList[A]) extends CustomList[A]
 
 object CustomList {
 
+  def append[A](a1: CustomList[A], a2: CustomList[A]): CustomList[A] =
+    a1 match {
+      case Nil => a2
+      case Cons(h,t) => Cons(h, append(t, a2))
+    }
+
+  def setHead[A](l: CustomList[A], e: A): CustomList[A] = Cons(e, l)
+
   def sum(ints: CustomList[Int]): Int = ints match {
     case Nil => 0
     case Cons(x,xs) => x + sum(xs)
