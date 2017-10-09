@@ -23,6 +23,11 @@ object CustomList {
     case _ => list
   }
 
+  def dropWhile[A](l: CustomList[A])(f: A => Boolean): CustomList[A] = l match {
+    case Cons(head, rest) if f(head) => dropWhile(rest)(f)
+    case _ => l
+  }
+
   def apply[A](as: A*): CustomList[A] =
     if (as.isEmpty) Nil
     else Cons(as.head, apply(as.tail: _*))

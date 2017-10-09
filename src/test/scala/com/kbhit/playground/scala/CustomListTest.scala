@@ -16,4 +16,8 @@ class CustomListTest extends FlatSpec with Matchers {
     CustomList.tail(CustomList[Int](1,2,3,4), 2) should be (CustomList[Int](3,4))
   }
 
+  "dropWhile f != 2 called on [1,2,3,4]" should "be [3,4]" in {
+    CustomList.dropWhile(CustomList[Int](1,2,3,4))(t => t <= 2) should be (CustomList[Int](3,4))
+  }
+
 }
