@@ -35,16 +35,24 @@ object CustomList {
   def length[A](l: CustomList[A]): Int =
     foldRight(l, 0)((_, b) => 1 + b)
 
+  def reverse[A](l: CustomList[A]): CustomList[A] =
+    foldLeft(l, CustomList[A]())((a: CustomList[A], b: A) => Cons(b, a))
+
   def apply[A](as: A*): CustomList[A] =
     if (as.isEmpty) Nil
     else Cons(as.head, apply(as.tail: _*))
 
-
-  private def foldRight[A,B](l: CustomList[A], z: B)(f: (A, B) => B, g: (A) => Boolean = (_: A) => true): B =
+  def foldRight[A,B](l: CustomList[A], z: B)(f: (A, B) => B, g: (A) => Boolean = (_: A) => true): B =
     l match {
       case Nil => z
       case Cons(x, xs) if g(x) => f(x, foldRight(xs, z)(f, g))
       case Cons(x, _) => f(x, z)
+    }
+
+  def foldLeft[A,B](l: CustomList[A], z: B)(f: (B, A) => B): B =
+    l match {
+      case Nil => z
+      case Cons(x, xs)  => foldLeft(xs, f(z, x))(f)
     }
 
 }

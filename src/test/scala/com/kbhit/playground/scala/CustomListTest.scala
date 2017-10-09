@@ -36,4 +36,8 @@ class CustomListTest extends FlatSpec with Matchers {
     CustomList.dropWhile(CustomList[Int](1,2,3,4))(t => t <= 2) should be (CustomList[Int](3,4))
   }
 
+  "reverse of [1,2,3]" should "be [3,2,1]" in {
+    CustomList.reverse(CustomList[Int](1,2,3)) should be (CustomList[Int](3,2,1))
+  }
+
 }
