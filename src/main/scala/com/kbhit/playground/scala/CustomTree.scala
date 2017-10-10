@@ -13,4 +13,16 @@ object CustomTree {
     case Leaf(_) => 1
   }
 
+  def maximum(t: CustomTree[Int]): Int = t match {
+    case Branch(x, y) => maximum(x) max maximum(y)
+    case Leaf(x) => x
+    case null => Int.MinValue
+  }
+
+  def depth[A](t: CustomTree[A]): Int = t match {
+    case Branch(x, y) => (depth(x) max depth(y)) + 1
+    case null => 0
+    case Leaf(_) => 1
+  }
+
 }
