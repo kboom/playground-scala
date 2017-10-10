@@ -16,4 +16,8 @@ class CustomTreeTest extends FlatSpec with Matchers {
     CustomTree.depth(Branch(Branch(Leaf(10), Leaf(100)), Leaf(99))) should be (3)
   }
 
+  "map" should "work" in {
+    CustomTree.map(Branch(Branch(Leaf(10), Leaf(100)), Leaf(99)))(t => t * 2) should be (Branch(Branch(Leaf(20), Leaf(200)), Leaf(198)))
+  }
+
 }

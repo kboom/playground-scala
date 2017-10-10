@@ -25,4 +25,10 @@ object CustomTree {
     case Leaf(_) => 1
   }
 
+  def map[A, B](t: CustomTree[A])(f: A => B): CustomTree[B] = t match {
+    case Branch(x, y) => Branch(map(x)(f), map(y)(f))
+    case Leaf(x) => Leaf(f(x))
+    case _ => null
+  }
+
 }
