@@ -2,7 +2,7 @@ package com.kbhit.playground.scala
 
 sealed trait CustomList[+A]
 
-case object Nil extends CustomList[Nothing]
+private case object Nil extends CustomList[Nothing]
 
 case class Cons[+A](head: A, tail: CustomList[A]) extends CustomList[A]
 
