@@ -50,11 +50,8 @@ object CustomList {
     case Cons(x, xs) => append(f(x), flatMap(xs)(f))
   }
 
-  def filter[A](l: CustomList[A])(f: A => Boolean): CustomList[A] = l match {
-    case Nil => Nil
-    case Cons(x, xs) if f(x) => Cons(x, filter(xs)(f))
-    case Cons(_, xs) => filter(xs)(f)
-  }
+  def filter[A](l: CustomList[A])(f: A => Boolean): CustomList[A] =
+    flatMap(l)(t => if (f(t)) CustomList(t) else Nil)
 
   def foldRight[A,B](l: CustomList[A], z: B)(f: (A, B) => B, g: (A) => Boolean = (_: A) => true): B =
     l match {
