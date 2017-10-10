@@ -50,6 +50,15 @@ object CustomList {
     case Cons(x, xs) => append(f(x), flatMap(xs)(f))
   }
 
+  def sumElements(a: CustomList[Int], b: CustomList[Int]): CustomList[Int] =
+    mapPairwise(a, b)(_ + _)
+
+  def mapPairwise[A](a: CustomList[A], b: CustomList[A])(f: (A, A) => A): CustomList[A] = (a, b) match {
+    case (Nil, Nil) => Nil
+    case (Cons(x, xs), Cons(y, ys)) => Cons(f(x, y), mapPairwise(xs, ys)(f))
+    case _ => throw new IllegalArgumentException("Both lists should be of the same size")
+  }
+
   def filter[A](l: CustomList[A])(f: A => Boolean): CustomList[A] =
     flatMap(l)(t => if (f(t)) CustomList(t) else Nil)
 

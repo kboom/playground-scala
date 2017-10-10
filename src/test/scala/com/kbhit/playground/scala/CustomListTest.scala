@@ -52,4 +52,8 @@ class CustomListTest extends FlatSpec with Matchers {
     CustomList.filter(CustomList[Int](1,2,3,4))(t => t % 2 == 0) should be (CustomList[Int](2,4))
   }
 
+  "sum of elements [1,2] and [3,4]" should "be [4,6]" in {
+    CustomList.sumElements(CustomList(1,2), CustomList(3,4)) should be (CustomList[Int](4,6))
+  }
+
 }
