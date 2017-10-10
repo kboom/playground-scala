@@ -53,6 +53,9 @@ object CustomList {
   def sumElements(a: CustomList[Int], b: CustomList[Int]): CustomList[Int] =
     mapPairwise(a, b)(_ + _)
 
+  def multiplyElements(a: CustomList[Int], b: CustomList[Int]): CustomList[Int] =
+    mapPairwise(a, b)(_ * _)
+
   def mapPairwise[A](a: CustomList[A], b: CustomList[A])(f: (A, A) => A): CustomList[A] = (a, b) match {
     case (Nil, Nil) => Nil
     case (Cons(x, xs), Cons(y, ys)) => Cons(f(x, y), mapPairwise(xs, ys)(f))

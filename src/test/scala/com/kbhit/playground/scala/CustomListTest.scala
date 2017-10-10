@@ -56,4 +56,8 @@ class CustomListTest extends FlatSpec with Matchers {
     CustomList.sumElements(CustomList(1,2), CustomList(3,4)) should be (CustomList[Int](4,6))
   }
 
+  "product of elements [1,2] and [3,4]" should "be [3,8]" in {
+    CustomList.multiplyElements(CustomList(1,2), CustomList(3,4)) should be (CustomList[Int](3,8))
+  }
+
 }
