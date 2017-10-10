@@ -44,6 +44,10 @@ class CustomListTest extends FlatSpec with Matchers {
     CustomList.map(CustomList[Int](1,2))(t => t * 2) should be (CustomList[Int](2,4))
   }
 
+  "flatMap x -> List(x,x) of [1,2]" should "be [1,1,2,2]" in {
+    CustomList.flatMap(CustomList[Int](1,2))(t => CustomList(t, t)) should be (CustomList[Int](1,1,2,2))
+  }
+
   "filter x % 2 == 0 of [1,2,3,4]" should "be [2,4]" in {
     CustomList.filter(CustomList[Int](1,2,3,4))(t => t % 2 == 0) should be (CustomList[Int](2,4))
   }
