@@ -45,6 +45,12 @@ object CustomList {
   def map[A,B](l: CustomList[A])(f: A => B): CustomList[B] =
     foldRight(l, CustomList[B]())((b: A, a: CustomList[B]) => Cons(f(b), a))
 
+  def filter[A](l: CustomList[A])(f: A => Boolean): CustomList[A] = l match {
+    case Nil => Nil
+    case Cons(x, xs) if f(x) => Cons(x, filter(xs)(f))
+    case Cons(_, xs) => filter(xs)(f)
+  }
+
   def foldRight[A,B](l: CustomList[A], z: B)(f: (A, B) => B, g: (A) => Boolean = (_: A) => true): B =
     l match {
       case Nil => z
