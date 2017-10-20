@@ -20,4 +20,8 @@ class CustomStreamTest extends FlatSpec with Matchers {
     CustomStreamImpl(2,4,9,12).forAll((x) => x % 2 == 0) should be (false)
   }
 
+  "infinite stream of n = 2" should "be [2,3,4,5,6]" in {
+    CustomStreamImpl.from(2).take(5) should be (List(2,3,4,5,6))
+  }
+
 }

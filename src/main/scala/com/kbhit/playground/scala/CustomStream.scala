@@ -19,7 +19,6 @@ trait CustomStream[+A] {
   def exists(p: A => Boolean): Boolean =
     foldRight(false)((a, b) => p(a) || b)
 
-
   def forAll(p: A => Boolean): Boolean =
     foldRight(true)((a, b) => p(a) && b)
 
@@ -33,6 +32,11 @@ object CustomStreamImpl {
   def cons[A](hd: => A, tl: => CustomStream[A]): CustomStream[A] =
     new CustomStream[A] {
       lazy val uncons = Some((hd, tl))
+    }
+
+  def from(n: Int): CustomStream[Int] =
+    new CustomStream[Int] {
+      lazy val uncons = Some((n, from(n + 1)))
     }
 
   def apply[A](as: A*): CustomStream[A] =
