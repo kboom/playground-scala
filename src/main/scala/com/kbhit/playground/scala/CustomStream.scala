@@ -35,8 +35,14 @@ object CustomStreamImpl {
     }
 
   def from(n: Int): CustomStream[Int] =
-    new CustomStream[Int] {
-      lazy val uncons = Some((n, from(n + 1)))
+    unfold(n)(n => Some(n, n + 1))
+
+  def unfold[A, S](z: S)(f: S => Option[(A, S)]): CustomStream[A] =
+    new CustomStream[A] {
+      lazy val uncons = f(z) match {
+        case Some((h, t)) => Some((h, unfold(t)(f)))
+        case _ => None
+      }
     }
 
   def apply[A](as: A*): CustomStream[A] =
