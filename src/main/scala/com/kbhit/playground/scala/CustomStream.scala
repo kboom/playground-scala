@@ -34,6 +34,16 @@ object CustomStreamImpl {
       lazy val uncons = Some((hd, tl))
     }
 
+  def fibs(): CustomStream[Int] =
+    unfold((0, 0)) {
+      case (0, 0) => Some((0, (0, 1)))
+      case (0, _) => Some((1, (1, 1)))
+      case (pp, pr) => Some((pr, (pr, pp + pr)))
+    }
+
+  def constant(c: Int): CustomStream[Int] =
+    unfold(c)(_ => Some(c, c))
+
   def from(n: Int): CustomStream[Int] =
     unfold(n)(n => Some(n, n + 1))
 
