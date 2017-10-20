@@ -8,6 +8,8 @@ trait CustomStream[+A] {
 
   def toList: List[A] = uncons.map((x) => x._1 :: x._2.toList).getOrElse(Nil)
 
+  def take(n: Int): List[A] = if (n > 0) uncons.map((x) => x._1 :: x._2.take(n - 1)).getOrElse(Nil) else Nil
+
 }
 
 object CustomStreamImpl {
