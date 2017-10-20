@@ -12,4 +12,8 @@ class CustomStreamTest extends FlatSpec with Matchers {
     CustomStreamImpl(1, 2, 3).take(2) should be (List(1, 2))
   }
 
+  "exists 2 of stream of 1,2,3" should "be true" in {
+    CustomStreamImpl(1, 2, 3).exists((x) => x == 2) should be (true)
+  }
+
 }

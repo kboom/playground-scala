@@ -10,6 +10,15 @@ trait CustomStream[+A] {
 
   def take(n: Int): List[A] = if (n > 0) uncons.map((x) => x._1 :: x._2.take(n - 1)).getOrElse(Nil) else Nil
 
+  def foldRight[B](z: => B)(f: (A, => B) => B): B =
+    uncons match {
+      case Some((h, t)) => f(h, t.foldRight(z)(f))
+      case None => z
+    }
+
+  def exists(p: A => Boolean): Boolean =
+    foldRight(false)((a, b) => p(a) || b)
+
 }
 
 object CustomStreamImpl {
