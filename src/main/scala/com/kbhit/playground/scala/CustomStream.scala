@@ -1,5 +1,7 @@
 package com.kbhit.playground.scala
 
+import com.kbhit.playground.scala.CustomStreamImpl.unfold
+
 trait CustomStream[+A] {
 
   def uncons: Option[(A, CustomStream[A])]
