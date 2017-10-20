@@ -5,31 +5,31 @@ import org.scalatest.{FlatSpec, _}
 class CustomOptionTest extends FlatSpec with Matchers {
 
   "map" should "work" in {
-    Some(3).map(t => t * 2) should be (Some(6))
+    CustomSome(3).map(t => t * 2) should be (CustomSome(6))
   }
 
   "flatMap" should "work" in {
-    Some(3).flatMap(t => Some(t * 2)) should be (Some(6))
+    CustomSome(3).flatMap(t => CustomSome(t * 2)) should be (CustomSome(6))
   }
 
   "orElse" should "work" in {
-    Some(3).orElse(Some(1)) should be (Some(3))
-    None.orElse(Some(1)) should be (Some(1))
+    CustomSome(3).orElse(CustomSome(1)) should be (CustomSome(3))
+    CustomNone.orElse(CustomSome(1)) should be (CustomSome(1))
   }
 
   "getOrElse" should "work" in {
-    Some(3).getOrElse(1) should be (3)
-    None.getOrElse(1) should be (1)
+    CustomSome(3).getOrElse(1) should be (3)
+    CustomNone.getOrElse(1) should be (1)
   }
 
   "filter" should "work" in {
-    Some(3).filter(t => t < 2) should be (None)
+    CustomSome(3).filter(t => t < 2) should be (CustomNone)
   }
 
   "map2" should "work" in {
-    CustomOption.map2(Some(2), Some(3))((x: Int, y: Int) => x * y) should be (Some(6))
-    CustomOption.map2(Some(2), None)((x: Int, y: Int) => x * y) should be (None)
-    CustomOption.map2(None, Some(2))((x: Int, y: Int) => x * y) should be (None)
+    CustomOption.map2(CustomSome(2), CustomSome(3))((x: Int, y: Int) => x * y) should be (CustomSome(6))
+    CustomOption.map2(CustomSome(2), CustomNone)((x: Int, y: Int) => x * y) should be (CustomNone)
+    CustomOption.map2(CustomNone, CustomSome(2))((x: Int, y: Int) => x * y) should be (CustomNone)
   }
 
   "sequence" should "work" in {
