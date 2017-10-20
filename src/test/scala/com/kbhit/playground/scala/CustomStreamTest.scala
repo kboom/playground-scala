@@ -16,4 +16,8 @@ class CustomStreamTest extends FlatSpec with Matchers {
     CustomStreamImpl(1, 2, 3).exists((x) => x == 2) should be (true)
   }
 
+  "forAll x % 2 == 0 of stream of 2,4,9,12" should "be false" in {
+    CustomStreamImpl(2,4,9,12).forAll((x) => x % 2 == 0) should be (false)
+  }
+
 }
