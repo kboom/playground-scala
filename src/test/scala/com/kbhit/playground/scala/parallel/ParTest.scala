@@ -2,6 +2,7 @@ package com.kbhit.playground.scala.parallel
 
 import java.util.concurrent.Executors
 
+import com.kbhit.playground.scala.Par
 import org.scalatest.{FlatSpec, _}
 
 class ParTest extends FlatSpec with Matchers {
