@@ -37,4 +37,9 @@ object Monoid {
     override def zero = true
   }
 
+  def optionMonoid[A] = new Monoid[Option[A]] {
+    override def op(a1: Option[A], a2: Option[A]) = a1.orElse(a2)
+    override def zero = None
+  }
+
 }
