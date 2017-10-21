@@ -20,4 +20,8 @@ class ParTest extends FlatSpec with Matchers {
     Par.sum(1 to 10)(threadPool).get() should be (55)
   }
 
+  "parallel fun of [1,2,3,4,5,6,7,8,9,10]" should "be 6" in {
+    Par.asyncF((a: Int) => a * 2)(4)(threadPool).get() should be (8)
+  }
+
 }
