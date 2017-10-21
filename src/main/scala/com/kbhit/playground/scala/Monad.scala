@@ -22,6 +22,11 @@ trait Monad[M[_]] extends Functor[M] {
 
 }
 
+case class Id[A](value: A) {
+  def map[B](f: A => B): Id[B] = Id(f(value))
+  def flatMap[B](f: A => Id[B]): Id[B] = f(value)
+}
+
 object Monad {
 
   val parMonad = new Monad[Par] {
@@ -37,6 +42,11 @@ object Monad {
         def apply(a: A) = f(a)
       }
 
+  }
+
+  val idMonad = new Monad[Id] {
+    def unit[A](a: => A) = Id(a)
+    override def flatMap[A,B](ida: Id[A])(f: A => Id[B]): Id[B] = ida flatMap f
   }
 
 }
