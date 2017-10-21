@@ -21,6 +21,14 @@ object Par {
 
   def async[A](a: => A): Par[A] = fork(unit(a))
 
+  def sum(as: IndexedSeq[Int]): Par[Int] =
+    if (as.isEmpty) Par.unit(0)
+    else if (as.size == 1) Par.unit(as.head)
+    else {
+      val (l,r) = as.splitAt(as.length/2)
+      Par.map2(Par.fork(sum(l)), Par.fork(sum(r)))(_ + _)
+    }
+
   private def toJBiFunction[A, B, C](predicate: (A, B) => C) =
     new BiFunction[A, B, C] {
       def apply(a: A, b: B) = predicate(a, b)

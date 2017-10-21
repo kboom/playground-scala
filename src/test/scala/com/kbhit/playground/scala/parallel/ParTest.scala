@@ -16,4 +16,8 @@ class ParTest extends FlatSpec with Matchers {
     Par.map2(Par.async(4), Par.async(2))(_ + _)(threadPool).get() should be (6)
   }
 
+  "parallel sum of [1,2,3,4,5,6,7,8,9,10]" should "be 6" in {
+    Par.sum(1 to 10)(threadPool).get() should be (55)
+  }
+
 }
