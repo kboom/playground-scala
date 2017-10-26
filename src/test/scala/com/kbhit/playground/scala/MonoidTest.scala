@@ -8,4 +8,8 @@ class MonoidTest extends FlatSpec with Matchers {
     List("abe", "cadlo").foldRight(Monoid.stringMonoid.zero)(Monoid.stringMonoid.op) should be ("abecadlo")
   }
 
+  "abe cadlod monoid" should "be abecadlo" in {
+    List("abe", "cadlo ", " z ", "pieca ").foldRight(Monoid.wordsMonoid.zero)(Monoid.wordsMonoid.op) should be ("abe cadlo z pieca")
+  }
+
 }

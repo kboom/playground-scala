@@ -12,6 +12,11 @@ object Monoid {
     def zero = ""
   }
 
+  val wordsMonoid = new Monoid[String] {
+    def op(x: String, y: String) = x.trim + " " + y.trim
+    def zero = ""
+  }
+
   def listMonoid[A] = new Monoid[List[A]] {
     def op(a1: List[A], a2: List[A]) = a1 ++ a2
     def zero = Nil
