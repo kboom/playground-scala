@@ -50,6 +50,9 @@ object CustomList {
     case Cons(x, xs) => append(f(x), flatMap(xs)(f))
   }
 
+  def concatenate[A](as: CustomList[A], m: Monoid[A]): A =
+    foldRight(as, m.zero)(m.op)
+
   def sumElements(a: CustomList[Int], b: CustomList[Int]): CustomList[Int] =
     mapPairwise(a, b)(_ + _)
 

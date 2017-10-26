@@ -9,7 +9,7 @@ class MonoidTest extends FlatSpec with Matchers {
   }
 
   "abe cadlod monoid" should "be abecadlo" in {
-    List("abe", "cadlo ", " z ", "pieca ").foldRight(Monoid.wordsMonoid.zero)(Monoid.wordsMonoid.op) should be ("abe cadlo z pieca")
+    CustomList.concatenate(CustomList("abe", "cadlo ", " z ", "pieca "), Monoid.wordsMonoid) should be ("abe cadlo z pieca")
   }
 
 }
