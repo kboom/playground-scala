@@ -53,6 +53,9 @@ object CustomList {
   def concatenate[A](as: CustomList[A], m: Monoid[A]): A =
     foldRight(as, m.zero)(m.op)
 
+  def foldMap[A,B](as: CustomList[A], m: Monoid[B])(f: A => B): B =
+    foldRight(map(as)(f), m.zero)(m.op)
+
   def sumElements(a: CustomList[Int], b: CustomList[Int]): CustomList[Int] =
     mapPairwise(a, b)(_ + _)
 
